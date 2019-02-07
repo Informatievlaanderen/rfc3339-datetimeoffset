@@ -22,11 +22,11 @@ namespace Be.Vlaanderen.Basisregisters.Utilities.Rfc3339DateTimeOffset.Tests
         {
             var poco = "<Poco xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><Versie>2002-08-13T17:32:32+02:00</Versie></Poco>";
 
-            var serializer = new DataContractSerializer(typeof(DeseriliazablePoco));
+            var serializer = new DataContractSerializer(typeof(DeserializablePoco));
 
             using (var contentXmlReader = XmlReader.Create(new StringReader(poco), new XmlReaderSettings { Async = false }))
             {
-                var result = (DeseriliazablePoco)serializer.ReadObject(contentXmlReader);
+                var result = (DeserializablePoco)serializer.ReadObject(contentXmlReader);
                 var versie = DateTimeOffset.Parse(result.Versie);
 
                 versie.Year.Should().Be(2002);
@@ -43,21 +43,44 @@ namespace Be.Vlaanderen.Basisregisters.Utilities.Rfc3339DateTimeOffset.Tests
         [Fact]
         public void WhenSerializingToJsonThenExpectCorrectString()
         {
-            var poco = new JsonPoco
+            var poco1 = new JsonPoco1
             {
                 Versie = new Rfc3339SerializableDateTimeOffset(new DateTimeOffset(2002, 08, 13, 17, 32, 32, 999, new TimeSpan(2, 0, 0)))
             };
 
-            var result = JsonConvert.SerializeObject(poco, SerializerSettings);
-            result.Should().NotBeEmpty();
-            result.Should().Be("{\"Versie\":\"2002-08-13T17:32:32.999+02:00\"}");
+            var poco2 = new JsonPoco2
+            {
+                Versie = new Rfc3339SerializableDateTimeOffset(new DateTimeOffset(2002, 08, 13, 17, 32, 32, 999, new TimeSpan(2, 0, 0)))
+            };
+
+            var poco3 = new JsonPoco2
+            {
+                Versie = null
+            };
+
+            var result1 = JsonConvert.SerializeObject(poco1, SerializerSettings);
+            result1.Should().NotBeEmpty();
+            result1.Should().Be("{\"Versie\":\"2002-08-13T17:32:32.999+02:00\"}");
+
+            var result2 = JsonConvert.SerializeObject(poco2, SerializerSettings);
+            result2.Should().NotBeEmpty();
+            result2.Should().Be("{\"Versie\":\"2002-08-13T17:32:32.999+02:00\"}");
+
+            var result3 = JsonConvert.SerializeObject(poco3, SerializerSettings);
+            result3.Should().NotBeEmpty();
+            result3.Should().Be("{\"Versie\":null}");
+
+            SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+            var result4 = JsonConvert.SerializeObject(poco3, SerializerSettings);
+            result4.Should().NotBeEmpty();
+            result4.Should().Be("{}");
         }
 
         [Fact]
         public void GivenDateTimeAsDateHandlingWhenDeserializingToJsonThenExpectCorrectString()
         {
             SerializerSettings.DateParseHandling = DateParseHandling.DateTime;
-            var result = JsonConvert.DeserializeObject<JsonPoco>("{\"Versie\":\"2002-08-13T17:32:32+02:00\"}", SerializerSettings);
+            var result = JsonConvert.DeserializeObject<JsonPoco1>("{\"Versie\":\"2002-08-13T17:32:32+02:00\"}", SerializerSettings);
             var versie = (DateTimeOffset)result.Versie;
 
             versie.Year.Should().Be(2002);
@@ -74,7 +97,7 @@ namespace Be.Vlaanderen.Basisregisters.Utilities.Rfc3339DateTimeOffset.Tests
         public void GivenDateTimeOffsetAsDateHandlingWhenDeserializingToJsonThenExpectCorrectString()
         {
             SerializerSettings.DateParseHandling = DateParseHandling.DateTimeOffset;
-            var result = JsonConvert.DeserializeObject<JsonPoco>("{\"Versie\":\"2002-08-13T17:32:32+02:00\"}", SerializerSettings);
+            var result = JsonConvert.DeserializeObject<JsonPoco1>("{\"Versie\":\"2002-08-13T17:32:32+02:00\"}", SerializerSettings);
             var versie = (DateTimeOffset)result.Versie;
 
             versie.Year.Should().Be(2002);
@@ -91,7 +114,7 @@ namespace Be.Vlaanderen.Basisregisters.Utilities.Rfc3339DateTimeOffset.Tests
         public void GivenNoneAsDateHandlingWhenDeserializingToJsonThenExpectCorrectString()
         {
             SerializerSettings.DateParseHandling = DateParseHandling.None;
-            var result = JsonConvert.DeserializeObject<JsonPoco>("{\"Versie\":\"2002-08-13T17:32:32+02:00\"}", SerializerSettings);
+            var result = JsonConvert.DeserializeObject<JsonPoco1>("{\"Versie\":\"2002-08-13T17:32:32+02:00\"}", SerializerSettings);
             var versie = (DateTimeOffset)result.Versie;
 
             versie.Year.Should().Be(2002);
@@ -105,17 +128,24 @@ namespace Be.Vlaanderen.Basisregisters.Utilities.Rfc3339DateTimeOffset.Tests
         }
 
         [DataContract(Name = "Poco", Namespace = "")]
-        public class DeseriliazablePoco
+        public class DeserializablePoco
         {
             [DataMember]
             public string Versie { get; set; }
         }
 
         [DataContract(Name = "Poco", Namespace = "")]
-        public class JsonPoco
+        public class JsonPoco1
         {
             [DataMember]
             public Rfc3339SerializableDateTimeOffset Versie { get; set; }
+        }
+
+        [DataContract(Name = "Poco", Namespace = "")]
+        public class JsonPoco2
+        {
+            [DataMember]
+            public Rfc3339SerializableDateTimeOffset? Versie { get; set; }
         }
     }
 }
