@@ -14,6 +14,12 @@ let pack = packSolution nugetVersionNumber
 
 Target "Lib_Build" (fun _ -> build "Be.Vlaanderen.Basisregisters.Utilities.Rfc3339DateTimeOffset")
 
+Target "Lib_Test" (fun _ ->
+  [
+    "test" @@ "Be.Vlaanderen.Basisregisters.Utilities.Rfc3339DateTimeOffset.Tests" ]
+  |> List.iter testWithDotNet
+)
+
 Target "Lib_Publish" (fun _ -> publish "Be.Vlaanderen.Basisregisters.Utilities.Rfc3339DateTimeOffset")
 Target "Lib_Pack" (fun _ -> pack "Be.Vlaanderen.Basisregisters.Utilities.Rfc3339DateTimeOffset")
 
@@ -26,7 +32,7 @@ Target "PackageMyGet" DoNothing
 Target "PackageAll" DoNothing
 
 // Publish ends up with artifacts in the build folder
-"DotNetCli" ==> "Clean" ==> "Restore" ==> "Lib_Build" ==> "Lib_Publish" ==> "PublishLibrary"
+"DotNetCli" ==> "Clean" ==> "Restore" ==> "Lib_Build" ==> "Lib_Test" ==> "Lib_Publish" ==> "PublishLibrary"
 "PublishLibrary" ==> "PublishAll"
 
 // Package ends up with local NuGet packages
