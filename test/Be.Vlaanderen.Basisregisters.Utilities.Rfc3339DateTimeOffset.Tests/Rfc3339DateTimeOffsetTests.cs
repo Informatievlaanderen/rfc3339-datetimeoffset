@@ -117,7 +117,6 @@ namespace Be.Vlaanderen.Basisregisters.Utilities.Rfc3339DateTimeOffset.Tests
             versie.Year.Should().Be(2002);
             versie.Month.Should().Be(8);
             versie.Day.Should().Be(13);
-            versie.Hour.Should().Be(17);
             versie.Minute.Should().Be(32);
             versie.Second.Should().Be(32);
             versie.Offset.Should().Be(new TimeSpan(2, 0, 0));
@@ -129,6 +128,8 @@ namespace Be.Vlaanderen.Basisregisters.Utilities.Rfc3339DateTimeOffset.Tests
             utcDate.Hour.Should().Be(15);
             utcDate.Minute.Should().Be(32);
             utcDate.Second.Should().Be(32);
+
+            versie.Hour.Should().Be(17);
         }
 
         [Fact]
