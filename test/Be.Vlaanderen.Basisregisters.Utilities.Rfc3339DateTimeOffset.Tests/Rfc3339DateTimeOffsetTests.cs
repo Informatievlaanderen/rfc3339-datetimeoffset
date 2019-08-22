@@ -37,14 +37,27 @@ namespace Be.Vlaanderen.Basisregisters.Utilities.Rfc3339DateTimeOffset.Tests
                 using (new AssertionScope()) versie.Minute.Should().Be(32);
                 using (new AssertionScope()) versie.Second.Should().Be(32);
                 using (new AssertionScope()) versie.Offset.Should().Be(new TimeSpan(2, 0, 0));
+            }
+        }
 
-                var utcDate = versie.UtcDateTime;
-                using (new AssertionScope()) utcDate.Year.Should().Be(2002);
-                using (new AssertionScope()) utcDate.Month.Should().Be(8);
-                using (new AssertionScope()) utcDate.Day.Should().Be(13);
-                using (new AssertionScope()) utcDate.Hour.Should().Be(15);
-                using (new AssertionScope()) utcDate.Minute.Should().Be(32);
-                using (new AssertionScope()) utcDate.Second.Should().Be(32);
+        [Fact]
+        public void WhenDeserializingXmlToDateTimeOffsetAndParsingThenEqualsExpectedUtcResult()
+        {
+            var poco = "<Poco xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><Versie>2002-08-13T17:32:32+02:00</Versie></Poco>";
+
+            var serializer = new DataContractSerializer(typeof(DeserializablePoco));
+
+            using (var contentXmlReader = XmlReader.Create(new StringReader(poco), new XmlReaderSettings { Async = false }))
+            {
+                var result = (DeserializablePoco)serializer.ReadObject(contentXmlReader);
+                var versie = DateTimeOffset.Parse(result.Versie).UtcDateTime;
+
+                using (new AssertionScope()) versie.Year.Should().Be(2002);
+                using (new AssertionScope()) versie.Month.Should().Be(8);
+                using (new AssertionScope()) versie.Day.Should().Be(13);
+                using (new AssertionScope()) versie.Hour.Should().Be(17);
+                using (new AssertionScope()) versie.Minute.Should().Be(32);
+                using (new AssertionScope()) versie.Second.Should().Be(32);
             }
         }
 
@@ -98,14 +111,21 @@ namespace Be.Vlaanderen.Basisregisters.Utilities.Rfc3339DateTimeOffset.Tests
             using (new AssertionScope()) versie.Minute.Should().Be(32);
             using (new AssertionScope()) versie.Second.Should().Be(32);
             using (new AssertionScope()) versie.Offset.Should().Be(new TimeSpan(2, 0, 0));
+        }
 
-            var utcDate = versie.UtcDateTime;
-            using (new AssertionScope()) utcDate.Year.Should().Be(2002);
-            using (new AssertionScope()) utcDate.Month.Should().Be(8);
-            using (new AssertionScope()) utcDate.Day.Should().Be(13);
-            using (new AssertionScope()) utcDate.Hour.Should().Be(15);
-            using (new AssertionScope()) utcDate.Minute.Should().Be(32);
-            using (new AssertionScope()) utcDate.Second.Should().Be(32);
+        [Fact]
+        public void GivenDateTimeAsDateHandlingWhenDeserializingToJsonThenExpectCorrectUtcString()
+        {
+            SerializerSettings.DateParseHandling = DateParseHandling.DateTime;
+            var result = JsonConvert.DeserializeObject<JsonPoco1>("{\"Versie\":\"2002-08-13T17:32:32+02:00\"}", SerializerSettings);
+            var versie = ((DateTimeOffset)result.Versie).UtcDateTime;
+
+            using (new AssertionScope()) versie.Year.Should().Be(2002);
+            using (new AssertionScope()) versie.Month.Should().Be(8);
+            using (new AssertionScope()) versie.Day.Should().Be(13);
+            using (new AssertionScope()) versie.Hour.Should().Be(17);
+            using (new AssertionScope()) versie.Minute.Should().Be(32);
+            using (new AssertionScope()) versie.Second.Should().Be(32);
         }
 
         [Fact]
@@ -122,15 +142,21 @@ namespace Be.Vlaanderen.Basisregisters.Utilities.Rfc3339DateTimeOffset.Tests
             using (new AssertionScope()) versie.Minute.Should().Be(32);
             using (new AssertionScope()) versie.Second.Should().Be(32);
             using (new AssertionScope()) versie.Offset.Should().Be(new TimeSpan(2, 0, 0));
+        }
 
-            var utcDate = versie.UtcDateTime;
-            using (new AssertionScope()) utcDate.Year.Should().Be(2002);
-            using (new AssertionScope()) utcDate.Month.Should().Be(8);
-            using (new AssertionScope()) utcDate.Day.Should().Be(13);
-            using (new AssertionScope()) utcDate.Hour.Should().Be(15);
-            using (new AssertionScope()) utcDate.Minute.Should().Be(32);
-            using (new AssertionScope()) utcDate.Second.Should().Be(32);
+        [Fact]
+        public void GivenDateTimeOffsetAsDateHandlingWhenDeserializingToJsonThenExpectCorrectUtcString()
+        {
+            SerializerSettings.DateParseHandling = DateParseHandling.DateTimeOffset;
+            var result = JsonConvert.DeserializeObject<JsonPoco1>("{\"Versie\":\"2002-08-13T17:32:32+02:00\"}", SerializerSettings);
+            var versie = ((DateTimeOffset)result.Versie).UtcDateTime;
 
+            using (new AssertionScope()) versie.Year.Should().Be(2002);
+            using (new AssertionScope()) versie.Month.Should().Be(8);
+            using (new AssertionScope()) versie.Day.Should().Be(13);
+            using (new AssertionScope()) versie.Hour.Should().Be(17);
+            using (new AssertionScope()) versie.Minute.Should().Be(32);
+            using (new AssertionScope()) versie.Second.Should().Be(32);
         }
 
         [Fact]
@@ -147,15 +173,21 @@ namespace Be.Vlaanderen.Basisregisters.Utilities.Rfc3339DateTimeOffset.Tests
             using (new AssertionScope()) versie.Minute.Should().Be(32);
             using (new AssertionScope()) versie.Second.Should().Be(32);
             using (new AssertionScope()) versie.Offset.Should().Be(new TimeSpan(2, 0, 0));
+        }
 
-            var utcDate = versie.UtcDateTime;
-            using (new AssertionScope()) utcDate.Year.Should().Be(2002);
-            using (new AssertionScope()) utcDate.Month.Should().Be(8);
-            using (new AssertionScope()) utcDate.Day.Should().Be(13);
-            using (new AssertionScope()) utcDate.Hour.Should().Be(15);
-            using (new AssertionScope()) utcDate.Minute.Should().Be(32);
-            using (new AssertionScope()) utcDate.Second.Should().Be(32);
+        [Fact]
+        public void GivenNoneAsDateHandlingWhenDeserializingToJsonThenExpectCorrectUtcString()
+        {
+            SerializerSettings.DateParseHandling = DateParseHandling.None;
+            var result = JsonConvert.DeserializeObject<JsonPoco1>("{\"Versie\":\"2002-08-13T17:32:32+02:00\"}", SerializerSettings);
+            var versie = ((DateTimeOffset)result.Versie).UtcDateTime;
 
+            using (new AssertionScope()) versie.Year.Should().Be(2002);
+            using (new AssertionScope()) versie.Month.Should().Be(8);
+            using (new AssertionScope()) versie.Day.Should().Be(13);
+            using (new AssertionScope()) versie.Hour.Should().Be(17);
+            using (new AssertionScope()) versie.Minute.Should().Be(32);
+            using (new AssertionScope()) versie.Second.Should().Be(32);
         }
 
         [DataContract(Name = "Poco", Namespace = "")]
