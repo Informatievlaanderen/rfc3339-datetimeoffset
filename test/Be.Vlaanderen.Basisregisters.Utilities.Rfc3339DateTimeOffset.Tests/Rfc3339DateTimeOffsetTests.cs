@@ -107,10 +107,10 @@ namespace Be.Vlaanderen.Basisregisters.Utilities.Rfc3339DateTimeOffset.Tests
             using (new AssertionScope()) versie.Year.Should().Be(2002);
             using (new AssertionScope()) versie.Month.Should().Be(8);
             using (new AssertionScope()) versie.Day.Should().Be(13);
-            using (new AssertionScope()) versie.Hour.Should().Be(17);
+            using (new AssertionScope()) versie.Hour.Should().Be(15);
             using (new AssertionScope()) versie.Minute.Should().Be(32);
             using (new AssertionScope()) versie.Second.Should().Be(32);
-            using (new AssertionScope()) versie.Offset.Should().Be(new TimeSpan(2, 0, 0));
+            using (new AssertionScope()) versie.Offset.Should().Be(new TimeSpan(0, 0, 0));
         }
 
         [Fact]
