@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/informatievlaanderen/rfc3339-datetimeoffset/compare/v1.2.0...v1.2.1) (2019-10-28)
+
+
+### Bug Fixes
+
+* upgrade build tools, move to fake 5 ([6e39073](https://github.com/informatievlaanderen/rfc3339-datetimeoffset/commit/6e39073))
+
 # [1.2.0](https://github.com/informatievlaanderen/rfc3339-datetimeoffset/compare/v1.1.1...v1.2.0) (2019-08-22)
 
 
