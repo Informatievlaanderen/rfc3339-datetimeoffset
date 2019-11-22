@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/informatievlaanderen/rfc3339-datetimeoffset/compare/v1.2.1...v2.0.0) (2019-11-22)
+
+
+### Code Refactoring
+
+* upgrade to netcoreapp30 ([90a983e](https://github.com/informatievlaanderen/rfc3339-datetimeoffset/commit/90a983e))
+
+
+### BREAKING CHANGES
+
+* Upgrade to .NET Core 3
+
 ## [1.2.1](https://github.com/informatievlaanderen/rfc3339-datetimeoffset/compare/v1.2.0...v1.2.1) (2019-10-28)
 
 
