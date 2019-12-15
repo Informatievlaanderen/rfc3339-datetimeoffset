@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/informatievlaanderen/rfc3339-datetimeoffset/compare/v2.0.0...v2.1.0) (2019-12-15)
+
+
+### Features
+
+* upgrade to netcoreapp31 ([0a06531](https://github.com/informatievlaanderen/rfc3339-datetimeoffset/commit/0a0653131612894889644b5420ae84cb363818d0))
+
 # [2.0.0](https://github.com/informatievlaanderen/rfc3339-datetimeoffset/compare/v1.2.1...v2.0.0) (2019-11-22)
 
 
