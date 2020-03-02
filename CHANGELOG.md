@@ -1,3 +1,10 @@
+## [2.2.1](https://github.com/informatievlaanderen/rfc3339-datetimeoffset/compare/v2.2.0...v2.2.1) (2020-03-02)
+
+
+### Bug Fixes
+
+* bump netcore to 3.1.2 ([c0f1b77](https://github.com/informatievlaanderen/rfc3339-datetimeoffset/commit/c0f1b77379c3adba0c6a403de9e2a1113568b7f7))
+
 # [2.2.0](https://github.com/informatievlaanderen/rfc3339-datetimeoffset/compare/v2.1.0...v2.2.0) (2020-01-31)
 
 
