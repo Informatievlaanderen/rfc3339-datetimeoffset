@@ -1,3 +1,10 @@
+## [2.2.2](https://github.com/informatievlaanderen/rfc3339-datetimeoffset/compare/v2.2.1...v2.2.2) (2020-05-04)
+
+
+### Bug Fixes
+
+* move to GH-actions ([012974a](https://github.com/informatievlaanderen/rfc3339-datetimeoffset/commit/012974a71e9b4c7d31de15b48ecba3abafe5a3f3))
+
 ## [2.2.1](https://github.com/informatievlaanderen/rfc3339-datetimeoffset/compare/v2.2.0...v2.2.1) (2020-03-02)
 
 
