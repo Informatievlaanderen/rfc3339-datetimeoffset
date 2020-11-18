@@ -1,3 +1,10 @@
+## [2.2.7](https://github.com/informatievlaanderen/rfc3339-datetimeoffset/compare/v2.2.6...v2.2.7) (2020-11-18)
+
+
+### Bug Fixes
+
+* remove set-env usage in gh-actions ([d054be9](https://github.com/informatievlaanderen/rfc3339-datetimeoffset/commit/d054be9aca3bc2c5a803ad664c1cea3bb29cbbee))
+
 ## [2.2.6](https://github.com/informatievlaanderen/rfc3339-datetimeoffset/compare/v2.2.5...v2.2.6) (2020-09-21)
 
 
