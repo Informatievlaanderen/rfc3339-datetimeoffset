@@ -1,3 +1,10 @@
+## [2.2.9](https://github.com/informatievlaanderen/rfc3339-datetimeoffset/compare/v2.2.8...v2.2.9) (2021-02-02)
+
+
+### Bug Fixes
+
+* move to 5.0.2 ([5f1e0a4](https://github.com/informatievlaanderen/rfc3339-datetimeoffset/commit/5f1e0a44849f91ae922670754aca1f49ccf4cf0c))
+
 ## [2.2.8](https://github.com/informatievlaanderen/rfc3339-datetimeoffset/compare/v2.2.7...v2.2.8) (2020-12-17)
 
 
