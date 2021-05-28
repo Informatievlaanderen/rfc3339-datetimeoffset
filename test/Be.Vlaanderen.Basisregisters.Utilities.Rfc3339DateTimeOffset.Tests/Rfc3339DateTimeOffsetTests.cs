@@ -96,6 +96,7 @@ namespace Be.Vlaanderen.Basisregisters.Utilities.Rfc3339DateTimeOffset.Tests
             result4.Should().Be("{}");
         }
 
+        //TODO: fix test so it doesn't fail, it fails only locally but not on build server
         [Fact]
         public void GivenDateTimeAsDateHandlingWhenDeserializingToJsonThenExpectCorrectString()
         {
