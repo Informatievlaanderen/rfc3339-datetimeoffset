@@ -15,9 +15,9 @@ licenseUrl https://opensource.org/licenses/MIT
 description RFC 3339 DateTimeOffset.
 
 dependencies
-  framework: net5.0
+  framework: net6.0
     Newtonsoft.Json >= LOCKEDVERSION
 
 files
-  bin\Release\net5.0\Be.Vlaanderen.Basisregisters.Utilities.Rfc3339DateTimeOffset.dll => lib\net5.0
-  bin\Release\net5.0\Be.Vlaanderen.Basisregisters.Utilities.Rfc3339DateTimeOffset.pdb => lib\net5.0
+  bin\Release\net6.0\Be.Vlaanderen.Basisregisters.Utilities.Rfc3339DateTimeOffset.dll => lib\net6.0
+  bin\Release\net6.0\Be.Vlaanderen.Basisregisters.Utilities.Rfc3339DateTimeOffset.pdb => lib\net6.0
