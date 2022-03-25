@@ -1,3 +1,20 @@
+# [3.0.0](https://github.com/informatievlaanderen/rfc3339-datetimeoffset/compare/v2.2.10...v3.0.0) (2022-03-25)
+
+
+### Bug Fixes
+
+* revert test change ([cfdd038](https://github.com/informatievlaanderen/rfc3339-datetimeoffset/commit/cfdd038ae9eee8c39ae3e925a407f08b3487c717))
+
+
+### Features
+
+* move to dotnet 6.0.3 ([d4d8484](https://github.com/informatievlaanderen/rfc3339-datetimeoffset/commit/d4d8484147a61696d8f5c229d72d1b7ec8ac7fa7))
+
+
+### BREAKING CHANGES
+
+* move to dotnet 6.0.3
+
 ## [2.2.10](https://github.com/informatievlaanderen/rfc3339-datetimeoffset/compare/v2.2.9...v2.2.10) (2021-05-28)
 
 
