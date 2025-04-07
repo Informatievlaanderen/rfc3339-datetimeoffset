@@ -39,22 +39,17 @@ namespace Be.Vlaanderen.Basisregisters.Utilities
         public override int GetHashCode()
             => _value.GetHashCode();
 
-        public XmlSchema GetSchema()
+        public XmlSchema? GetSchema()
             => null;
 
-        public override bool Equals(object o)
+        public override bool Equals(object? o)
         {
-            switch (o)
+            return o switch
             {
-                case Rfc3339SerializableDateTimeOffset other:
-                    return _value.Equals(other._value);
-
-                case DateTimeOffset other:
-                    return _value.Equals(other);
-
-                default:
-                    return false;
-            }
+                Rfc3339SerializableDateTimeOffset other => _value.Equals(other._value),
+                DateTimeOffset other => _value.Equals(other),
+                _ => false
+            };
         }
 
         public void ReadXml(XmlReader reader)
@@ -62,7 +57,7 @@ namespace Be.Vlaanderen.Basisregisters.Utilities
             var text = reader.ReadElementString();
 
             _value = DateTimeUtils.TryParseDate(text, out var value)
-                ? value.Value
+                ? value!.Value
                 : throw new FormatException("Invalid datetime format.");
         }
 
