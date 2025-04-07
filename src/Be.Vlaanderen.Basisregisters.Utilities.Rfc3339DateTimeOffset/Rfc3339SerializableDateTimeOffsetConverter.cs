@@ -36,15 +36,15 @@ namespace Be.Vlaanderen.Basisregisters.Utilities
                 switch (serializer.DateParseHandling)
                 {
                     case DateParseHandling.None:
-                        var parsedDateTimeOffset = DateTimeOffset.Parse((string) reader.Value);
+                        var parsedDateTimeOffset = DateTimeOffset.Parse((string) reader.Value!);
                         return new Rfc3339SerializableDateTimeOffset(parsedDateTimeOffset);
 
                     case DateParseHandling.DateTime:
-                        var dateTime = new DateTimeOffset((DateTime) reader.Value);
+                        var dateTime = new DateTimeOffset((DateTime) reader.Value!);
                         return new Rfc3339SerializableDateTimeOffset(dateTime);
 
                     case DateParseHandling.DateTimeOffset:
-                        var dateTimeOffset = (DateTimeOffset) reader.Value;
+                        var dateTimeOffset = (DateTimeOffset) reader.Value!;
                         return new Rfc3339SerializableDateTimeOffset(dateTimeOffset);
 
                     default:

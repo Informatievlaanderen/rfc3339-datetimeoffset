@@ -1,11 +1,11 @@
 namespace Be.Vlaanderen.Basisregisters.Utilities.Rfc3339DateTimeOffset.Tests
 {
-    using FluentAssertions;
-    using Newtonsoft.Json;
     using System;
     using System.IO;
     using System.Runtime.Serialization;
     using System.Xml;
+    using Newtonsoft.Json;
+    using Shouldly;
     using Xunit;
 
     public class Rfc3339DateTimeOffsetTests
@@ -29,13 +29,13 @@ namespace Be.Vlaanderen.Basisregisters.Utilities.Rfc3339DateTimeOffset.Tests
                 var result = (DeserializablePoco)serializer.ReadObject(contentXmlReader);
                 var versie = DateTimeOffset.Parse(result.Versie);
 
-                versie.Year.Should().Be(2002);
-                versie.Month.Should().Be(8);
-                versie.Day.Should().Be(13);
-                versie.Hour.Should().Be(17);
-                versie.Minute.Should().Be(32);
-                versie.Second.Should().Be(32);
-                versie.Offset.Should().Be(new TimeSpan(2, 0, 0));
+                versie.Year.ShouldBe(2002);
+                versie.Month.ShouldBe(8);
+                versie.Day.ShouldBe(13);
+                versie.Hour.ShouldBe(17);
+                versie.Minute.ShouldBe(32);
+                versie.Second.ShouldBe(32);
+                versie.Offset.ShouldBe(new TimeSpan(2, 0, 0));
             }
         }
 
@@ -51,12 +51,12 @@ namespace Be.Vlaanderen.Basisregisters.Utilities.Rfc3339DateTimeOffset.Tests
                 var result = (DeserializablePoco)serializer.ReadObject(contentXmlReader);
                 var versie = DateTimeOffset.Parse(result.Versie).UtcDateTime;
 
-                versie.Year.Should().Be(2002);
-                versie.Month.Should().Be(8);
-                versie.Day.Should().Be(13);
-                versie.Hour.Should().Be(15);
-                versie.Minute.Should().Be(32);
-                versie.Second.Should().Be(32);
+                versie.Year.ShouldBe(2002);
+                versie.Month.ShouldBe(8);
+                versie.Day.ShouldBe(13);
+                versie.Hour.ShouldBe(15);
+                versie.Minute.ShouldBe(32);
+                versie.Second.ShouldBe(32);
             }
         }
 
@@ -79,38 +79,39 @@ namespace Be.Vlaanderen.Basisregisters.Utilities.Rfc3339DateTimeOffset.Tests
             };
 
             var result1 = JsonConvert.SerializeObject(poco1, SerializerSettings);
-            result1.Should().NotBeEmpty();
-            result1.Should().Be("{\"Versie\":\"2002-08-13T17:32:32.999+02:00\"}");
+            result1.ShouldNotBeNullOrEmpty();
+            result1.ShouldBe("{\"Versie\":\"2002-08-13T17:32:32.999+02:00\"}");
 
             var result2 = JsonConvert.SerializeObject(poco2, SerializerSettings);
-            result2.Should().NotBeEmpty();
-            result2.Should().Be("{\"Versie\":\"2002-08-13T17:32:32.999+02:00\"}");
+            result2.ShouldNotBeNullOrEmpty();
+            result2.ShouldBe("{\"Versie\":\"2002-08-13T17:32:32.999+02:00\"}");
 
             var result3 = JsonConvert.SerializeObject(poco3, SerializerSettings);
-            result3.Should().NotBeEmpty();
-            result3.Should().Be("{\"Versie\":null}");
+            result3.ShouldNotBeNullOrEmpty();
+            result3.ShouldBe("{\"Versie\":null}");
 
             SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
             var result4 = JsonConvert.SerializeObject(poco3, SerializerSettings);
-            result4.Should().NotBeEmpty();
-            result4.Should().Be("{}");
+            result4.ShouldNotBeNullOrEmpty();
+            result4.ShouldBe("{}");
         }
 
-        //TODO: fix test so it doesn't fail, it fails only locally but not on build server
         [Fact]
         public void GivenDateTimeAsDateHandlingWhenDeserializingToJsonThenExpectCorrectString()
         {
             SerializerSettings.DateParseHandling = DateParseHandling.DateTime;
             var result = JsonConvert.DeserializeObject<JsonPoco1>("{\"Versie\":\"2002-08-13T17:32:32+02:00\"}", SerializerSettings);
             var versie = (DateTimeOffset)result.Versie;
+            var utcVersionTime = versie.UtcDateTime;
 
-            versie.Year.Should().Be(2002);
-            versie.Month.Should().Be(8);
-            versie.Day.Should().Be(13);
-            versie.Hour.Should().Be(15);
-            versie.Minute.Should().Be(32);
-            versie.Second.Should().Be(32);
-            versie.Offset.Should().Be(new TimeSpan(0, 0, 0));
+            utcVersionTime.Year.ShouldBe(2002);
+            utcVersionTime.Month.ShouldBe(8);
+            utcVersionTime.Day.ShouldBe(13);
+            utcVersionTime.Hour.ShouldBe(15);
+            utcVersionTime.Minute.ShouldBe(32);
+            utcVersionTime.Second.ShouldBe(32);
+
+            versie.Offset.ShouldBe(DateTimeOffset.Now.Offset);
         }
 
         [Fact]
@@ -120,12 +121,12 @@ namespace Be.Vlaanderen.Basisregisters.Utilities.Rfc3339DateTimeOffset.Tests
             var result = JsonConvert.DeserializeObject<JsonPoco1>("{\"Versie\":\"2002-08-13T17:32:32+02:00\"}", SerializerSettings);
             var versie = ((DateTimeOffset)result.Versie).UtcDateTime;
 
-            versie.Year.Should().Be(2002);
-            versie.Month.Should().Be(8);
-            versie.Day.Should().Be(13);
-            versie.Hour.Should().Be(15);
-            versie.Minute.Should().Be(32);
-            versie.Second.Should().Be(32);
+            versie.Year.ShouldBe(2002);
+            versie.Month.ShouldBe(8);
+            versie.Day.ShouldBe(13);
+            versie.Hour.ShouldBe(15);
+            versie.Minute.ShouldBe(32);
+            versie.Second.ShouldBe(32);
         }
 
         [Fact]
@@ -135,13 +136,13 @@ namespace Be.Vlaanderen.Basisregisters.Utilities.Rfc3339DateTimeOffset.Tests
             var result = JsonConvert.DeserializeObject<JsonPoco1>("{\"Versie\":\"2002-08-13T17:32:32+02:00\"}", SerializerSettings);
             var versie = (DateTimeOffset)result.Versie;
 
-            versie.Year.Should().Be(2002);
-            versie.Month.Should().Be(8);
-            versie.Day.Should().Be(13);
-            versie.Hour.Should().Be(17);
-            versie.Minute.Should().Be(32);
-            versie.Second.Should().Be(32);
-            versie.Offset.Should().Be(new TimeSpan(2, 0, 0));
+            versie.Year.ShouldBe(2002);
+            versie.Month.ShouldBe(8);
+            versie.Day.ShouldBe(13);
+            versie.Hour.ShouldBe(17);
+            versie.Minute.ShouldBe(32);
+            versie.Second.ShouldBe(32);
+            versie.Offset.ShouldBe(new TimeSpan(2, 0, 0));
         }
 
         [Fact]
@@ -151,12 +152,12 @@ namespace Be.Vlaanderen.Basisregisters.Utilities.Rfc3339DateTimeOffset.Tests
             var result = JsonConvert.DeserializeObject<JsonPoco1>("{\"Versie\":\"2002-08-13T17:32:32+02:00\"}", SerializerSettings);
             var versie = ((DateTimeOffset)result.Versie).UtcDateTime;
 
-            versie.Year.Should().Be(2002);
-            versie.Month.Should().Be(8);
-            versie.Day.Should().Be(13);
-            versie.Hour.Should().Be(15);
-            versie.Minute.Should().Be(32);
-            versie.Second.Should().Be(32);
+            versie.Year.ShouldBe(2002);
+            versie.Month.ShouldBe(8);
+            versie.Day.ShouldBe(13);
+            versie.Hour.ShouldBe(15);
+            versie.Minute.ShouldBe(32);
+            versie.Second.ShouldBe(32);
         }
 
         [Fact]
@@ -166,13 +167,13 @@ namespace Be.Vlaanderen.Basisregisters.Utilities.Rfc3339DateTimeOffset.Tests
             var result = JsonConvert.DeserializeObject<JsonPoco1>("{\"Versie\":\"2002-08-13T17:32:32+02:00\"}", SerializerSettings);
             var versie = (DateTimeOffset)result.Versie;
 
-            versie.Year.Should().Be(2002);
-            versie.Month.Should().Be(8);
-            versie.Day.Should().Be(13);
-            versie.Hour.Should().Be(17);
-            versie.Minute.Should().Be(32);
-            versie.Second.Should().Be(32);
-            versie.Offset.Should().Be(new TimeSpan(2, 0, 0));
+            versie.Year.ShouldBe(2002);
+            versie.Month.ShouldBe(8);
+            versie.Day.ShouldBe(13);
+            versie.Hour.ShouldBe(17);
+            versie.Minute.ShouldBe(32);
+            versie.Second.ShouldBe(32);
+            versie.Offset.ShouldBe(new TimeSpan(2, 0, 0));
         }
 
         [Fact]
@@ -182,12 +183,12 @@ namespace Be.Vlaanderen.Basisregisters.Utilities.Rfc3339DateTimeOffset.Tests
             var result = JsonConvert.DeserializeObject<JsonPoco1>("{\"Versie\":\"2002-08-13T17:32:32+02:00\"}", SerializerSettings);
             var versie = ((DateTimeOffset)result.Versie).UtcDateTime;
 
-            versie.Year.Should().Be(2002);
-            versie.Month.Should().Be(8);
-            versie.Day.Should().Be(13);
-            versie.Hour.Should().Be(15);
-            versie.Minute.Should().Be(32);
-            versie.Second.Should().Be(32);
+            versie.Year.ShouldBe(2002);
+            versie.Month.ShouldBe(8);
+            versie.Day.ShouldBe(13);
+            versie.Hour.ShouldBe(15);
+            versie.Minute.ShouldBe(32);
+            versie.Second.ShouldBe(32);
         }
 
         [DataContract(Name = "Poco", Namespace = "")]
