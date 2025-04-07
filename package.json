@@ -1,6 +1,6 @@
 {
   "name": "rfc3339-datetimeoffset",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "description": "RFC 3339 DateTimeOffset.",
   "author": "Basisregisters Vlaanderen",
   "license": "MIT",

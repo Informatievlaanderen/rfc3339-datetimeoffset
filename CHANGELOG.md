@@ -1,3 +1,15 @@
+# [5.0.0](https://github.com/informatievlaanderen/rfc3339-datetimeoffset/compare/v4.0.0...v5.0.0) (2025-04-07)
+
+
+### Code Refactoring
+
+* use renovate and nuget + update pipeline ([88eb1d9](https://github.com/informatievlaanderen/rfc3339-datetimeoffset/commit/88eb1d998782587f0be5097ee02cdf8b235eea11))
+
+
+### BREAKING CHANGES
+
+* update to dotnet 9
+
 # [4.0.0](https://github.com/informatievlaanderen/rfc3339-datetimeoffset/compare/v3.0.0...v4.0.0) (2024-03-08)
 
 
