@@ -1,3 +1,10 @@
+# [5.1.0](https://github.com/informatievlaanderen/rfc3339-datetimeoffset/compare/v5.0.0...v5.1.0) (2026-06-02)
+
+
+### Features
+
+* update packages ([41edd49](https://github.com/informatievlaanderen/rfc3339-datetimeoffset/commit/41edd49d7b97df56f3d3f53296113a41adcd9aa5))
+
 # [5.0.0](https://github.com/informatievlaanderen/rfc3339-datetimeoffset/compare/v4.0.0...v5.0.0) (2025-04-07)
 
 
